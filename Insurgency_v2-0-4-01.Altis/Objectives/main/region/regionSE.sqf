@@ -59,7 +59,7 @@ while { count _targetArray > 0 } do {
 	//------------------------------------------ Spawn enemies
 
 	sleep 5;
-	_enemiesArray = [currentAO] call QS_fnc_AOenemy;
+	_enemiesArray = [currentAO] call QS1_fnc_AOenemy;
 
 	//------------------------------------------ Spawn radiotower
 
