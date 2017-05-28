@@ -12,11 +12,11 @@ _underwaterBaddies = [];
 
 // Find Location -----------------------------------
 
-_smLoc = [] call QS_fnc_findWaterLocation;
+_smLoc = [] call QS1_fnc_findWaterLocation;
 
 // Spawn Enemies -----------------------------------
 
-_underwaterBaddies = [_smLoc] call QS_fnc_underwaterTangos;
+_underwaterBaddies = [_smLoc] call QS1_fnc_underwaterTangos;
 
 // Spawn Objective ---------------------------------
 /* --------
@@ -60,7 +60,7 @@ waterObjBuilding enableSimulationGlobal true;
 waterObjBuilding enableSimulation true;
 
 
-_defenders = [waterObjBuilding] call QS_fnc_underwaterBuildingDefenders;
+_defenders = [waterObjBuilding] call QS1_fnc_underwaterBuildingDefenders;
 _c4Message = ["The charge has been set! 30 seconds until detonation.","The c4 has been set! 30 seconds until detonation.","The charge is set! 30 seconds until detonation."] call BIS_fnc_selectRandom;
 
 
@@ -129,7 +129,7 @@ while { sideMissionUp } do {
 
 		//-------------------- DE-BRIEFING
 
-		[] call QS_fnc_SMhintSUCCESS;
+		[] call QS1_fnc_SMhintSUCCESS;
         ["underWaterTask", "Succeeded",true] call BIS_fnc_taskSetState;
         sleep 5;
         ["underWaterTask",west] call bis_fnc_deleteTask;
