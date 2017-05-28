@@ -2,11 +2,11 @@
 Author:
 
 	Quiksilver
-	
+
 Last modified:
 
 	24/04/2014
-	
+
 Description:
 
 	Secure HQ supplies before destroying it.
@@ -35,7 +35,7 @@ _c4Message = ["Weapons transfer secured. The charge has been set! 15 seconds unt
 			_accepted = true;
 		};
 	};
-	
+
 	_flatPos1 = [_flatPos, 15, 50] call BIS_fnc_relPos;
 	_flatPos2 = [_flatPos, 15, 80] call BIS_fnc_relPos;
 
@@ -48,19 +48,19 @@ _c4Message = ["Weapons transfer secured. The charge has been set! 15 seconds unt
 	sideObj setPos [(getPos sideObj select 0), (getPos sideObj select 1), (getPos sideObj select 2)];
 	sideObj setVectorUp [0,0,1];
 	sideObj setDir _objDir;
-	
+
 	_object = [indCrate1,indCrate2] call BIS_fnc_selectRandom;
 	_object setPos [(getPos sideObj select 0), (getPos sideObj select 1), ((getPos sideObj select 2) + 2)];
-	
+
 	truck1 = "O_Truck_03_ammo_F" createVehicle _flatPos1;
 	truck2 = "I_Truck_02_ammo_F" createVehicle _flatPos2;
-	
+
 	{ _x setDir random 360 } forEach [truck1,truck2];
 	{ _x lock 3 } forEach [truck1,truck2];
 
 //-------------------- SPAWN FORCE PROTECTION
 
-	_enemiesArray = [sideObj] call QS_fnc_SMenemyIND;
+	_enemiesArray = [sideObj] call QS1_fnc_SMenemyIND;
 
 //-------------------- SPAWN BRIEFING
 
@@ -73,7 +73,7 @@ _c4Message = ["Weapons transfer secured. The charge has been set! 15 seconds unt
 	GlobalHint = _briefing; hint parseText GlobalHint; publicVariable "GlobalHint";
 	showNotification = ["NewSideMission", "Secure Launchers"]; publicVariable "showNotification";
 	sideMarkerText = "Secure Launchers"; publicVariable "sideMarkerText";
-	
+
 //-------------------- [ CORE LOOPS ] ------------------------ [ CORE LOOPS ]
 
 	sideMissionUp = true; publicVariable "sideMissionUp";
@@ -84,47 +84,47 @@ while { sideMissionUp } do {
 	//--------------------------------------------- IF PACKAGE DESTROYED [FAIL]
 
 	if (!alive sideObj) exitWith {
-		
-		//-------------------- DE-BRIEFING
-		
-		sideMissionUp = false; publicVariable "sideMissionUp";
-		hqSideChat = "Objective destroyed! Mission FAILED!"; publicVariable "hqSideChat"; [WEST,"HQ"] sideChat hqSideChat;
-		[] spawn QS_fnc_SMhintFAIL;
-		{ _x setMarkerPos [-10000,-10000,-10000]; } forEach ["sideMarker", "sideCircle"]; publicVariable "sideMarker";
-		
-		//-------------------- DELETE
-		
-		_object setPos [-10000,-10000,0];
-		sleep 120;
-		{ deleteVehicle _x } forEach [sideObj,truck1,truck2];
-		deleteVehicle nearestObject [getPos sideObj,"Land_Cargo_House_V2_ruins_F"];
-		{ [_x] spawn QS_fnc_SMdelete } forEach [_unitsArray,_enemiesArray];
-	};
-	
-	//--------------------------------------------- IF PACKAGE DESTROYED [FAIL]
-	
-	if (SM_SUCCESS) exitWith {
-		
-		hqSideChat = _c4Message; publicVariable "hqSideChat"; [WEST,"HQ"] sideChat hqSideChat;
-	
-		//-------------------- BOOM!
-	
-		sleep 12;											
-		"Bo_Mk82" createVehicle getPos _object; 			
-		sleep 0.1;
-		_object setPos [-10000,-10000,0];
-	
+
 		//-------------------- DE-BRIEFING
 
 		sideMissionUp = false; publicVariable "sideMissionUp";
-		[] call QS_fnc_SMhintSUCCESS;
+		hqSideChat = "Objective destroyed! Mission FAILED!"; publicVariable "hqSideChat"; [WEST,"HQ"] sideChat hqSideChat;
+		[] spawn QS1_fnc_SMhintFAIL;
 		{ _x setMarkerPos [-10000,-10000,-10000]; } forEach ["sideMarker", "sideCircle"]; publicVariable "sideMarker";
-	
-		//--------------------- DELETE
-		
+
+		//-------------------- DELETE
+
+		_object setPos [-10000,-10000,0];
 		sleep 120;
 		{ deleteVehicle _x } forEach [sideObj,truck1,truck2];
 		deleteVehicle nearestObject [getPos sideObj,"Land_Cargo_House_V2_ruins_F"];
-		{ [_x] spawn QS_fnc_SMdelete } forEach [_unitsArray,_enemiesArray];
+		{ [_x] spawn QS1_fnc_SMdelete } forEach [_unitsArray,_enemiesArray];
+	};
+
+	//--------------------------------------------- IF PACKAGE DESTROYED [FAIL]
+
+	if (SM_SUCCESS) exitWith {
+
+		hqSideChat = _c4Message; publicVariable "hqSideChat"; [WEST,"HQ"] sideChat hqSideChat;
+
+		//-------------------- BOOM!
+
+		sleep 12;
+		"Bo_Mk82" createVehicle getPos _object;
+		sleep 0.1;
+		_object setPos [-10000,-10000,0];
+
+		//-------------------- DE-BRIEFING
+
+		sideMissionUp = false; publicVariable "sideMissionUp";
+		[] call QS1_fnc_SMhintSUCCESS;
+		{ _x setMarkerPos [-10000,-10000,-10000]; } forEach ["sideMarker", "sideCircle"]; publicVariable "sideMarker";
+
+		//--------------------- DELETE
+
+		sleep 120;
+		{ deleteVehicle _x } forEach [sideObj,truck1,truck2];
+		deleteVehicle nearestObject [getPos sideObj,"Land_Cargo_House_V2_ruins_F"];
+		{ [_x] spawn QS1_fnc_SMdelete } forEach [_unitsArray,_enemiesArray];
 	};
 };

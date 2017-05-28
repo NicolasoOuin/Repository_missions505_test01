@@ -188,12 +188,12 @@ if (count _this > 7) then {
       _hidden set [count _hidden, _u];
     };
 
-    SHK_BuildingPos_EH = [true,_hidden];
+    SHK1_BuildingPos_EH = [true,_hidden];
     publicvariable "SHK_BuildingPos_EH";
     if !isdedicated then { [true,_hidden] call SHK1_BuildingPos_fnc };
 
     waituntil {(call compile _condition)};
-    SHK_BuildingPos_EH = [false,_hidden];
+    SHK1_BuildingPos_EH = [false,_hidden];
     publicvariable "SHK_BuildingPos_EH";
     if !isdedicated then { [false,_hidden] call SHK1_BuildingPos_fnc };
   };

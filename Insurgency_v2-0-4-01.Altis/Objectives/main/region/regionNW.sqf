@@ -64,7 +64,7 @@ while { count _targetArray > 0 } do {
 	//------------------------------------------ Spawn enemies
 
 	sleep 5;
-	_enemiesArray = [currentAO] call QS_fnc_AOenemy;
+	_enemiesArray = [currentAO] call QS1_fnc_AOenemy;
 
 	//------------------------------------------ Spawn radiotower
 
@@ -94,7 +94,7 @@ while { count _targetArray > 0 } do {
 	_chance = random 10;
 	if (_chance < PARAMS_RadioTowerMineFieldChance) then {
 
-		_unitsArray = [_flatPos] call QS_fnc_AOminefield;
+		_unitsArray = [_flatPos] call QS1_fnc_AOminefield;
 
 		"radioMarker" setMarkerText "Radiotower (Minefield)";
 	} else {
@@ -165,8 +165,8 @@ while { count _targetArray > 0 } do {
 	//------------------------------------------------- DELETE
 
 	deleteVehicle _dt;
-	[_enemiesArray] spawn QS_fnc_AOdelete;
-	if (_chance < PARAMS_RadioTowerMineFieldChance) then {[_unitsArray] spawn QS_fnc_AOdelete;};
+	[_enemiesArray] spawn QS1_fnc_AOdelete;
+	if (_chance < PARAMS_RadioTowerMineFieldChance) then {[_unitsArray] spawn QS1_fnc_AOdelete;};
 
 	//------------------------------------------------- DEFEND AO
 
@@ -183,7 +183,7 @@ while { count _targetArray > 0 } do {
 
 	if ((random 1) > 0.25) then {
 		if (PARAMS_CasFixedWingSupport != 0) then {
-			[] call QS_fnc_casRespawn;
+			[] call QS1_fnc_casRespawn;
 		};
 	};
 

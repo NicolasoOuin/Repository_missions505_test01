@@ -1,0 +1,93 @@
+class QS1
+{
+	tag = "QS1";
+	class functions1
+	{
+		file = "functions1";
+		class findWaterLocation1 {};
+		class actionClearInventory1 {};
+		class actionRefuelUAV1 {};
+		class actionUAVSoftware1 {};
+		class addAction1 {};
+		class addActionRescueIntel1 {};
+		class addActionGetIntel1 {};
+		class addActionSurrender1 {};
+		class airDrop1 {};
+		class AOdelete1 {};
+		class AOenemy1 {};
+		class AOdefend1 {};
+		class AOenemy21 {};
+		class AOminefield1 {};
+		class casRespawn1 {};
+		class clearPosition1 {};
+		class conditionAirDrop1 {};
+		class conditionClearInventory1 {};
+		class conditionMobileArmory1 {};
+		class conditionRefuelUAV1 {};
+		class conditionUAVSoftware1 {};
+		class conditionUH80TurretActionLockL1 {};
+		class conditionUH80TurretActionLockR1 {};
+		class conditionUH80TurretActions1 {};
+		class conditionUH80TurretActionUnlockL1 {};
+		class conditionUH80TurretActionUnlockR1 {};
+		class conditionUH80TurretControl1 {};
+		class deleteUnits1 {};
+		class ejectCrew1 {};
+		class enemyCAS1 {};
+		class garrisonFortEAST1 {};
+		class garrisonFortIND11 {};
+		class garrisonFortFIA11 {};
+		class garrisonFortSYN11 {};
+		class loadInventory11 {};
+		class respawnPilot1 {};
+		class rewardPlusHintJet1 {};
+		class removeAction1 {};
+		class removeAction01 {};
+		class removeAction11 {};
+		class setSkill11 {};
+		class setSkill21 {};
+		class setSkill31 {};
+		class setSkill41 {};
+		class PTenemyEAST1 {};
+		class Eventcsat1 {};
+		class SMenemyEAST1 {};
+		class SMenemySYND1 {};
+		class SMenemySYNDintel1 {};
+		class SMenemyEASTintel1 {};
+		class SMenemyIND1 {};
+		class SMenemyFIA1 {};
+		class SMdelete1 {};
+		class SMhintFAIL1 {};
+		class SMhintSUCCESS1 {};
+		class switchMoveMP1 {};
+		class taskAttack1 {};
+        class underwaterBuildingDefenders1 {};
+		class underwaterTangos1 {};
+		class uh80Turret1 {};
+		class uh80TurretActionCancel1 {};
+		class uh80TurretActions1 {};
+		class uh80TurretControl1 {};
+		class uh80TurretReset1 {};
+		class vMonitor1 {};
+		class vSetup021 {};
+		class serverMapTP1 {};
+	};
+};
+class CHVD1
+{
+	tag = "CHVD1";
+	class functions1
+	{
+		file = "functions1\CHVD1";
+		class onCheckedChanged1 {};
+		class onSliderChange1 {};
+		class onLBSelChanged1 {};
+		class onEBinput1 {};
+		class onEBterrainInput1 {};
+		class selTerrainQuality1 {};
+		class updateTerrain1 {};
+		class updateSettings1 {};
+		class openDialog1 {};
+		class init1 {postInit = 1;};
+	};
+};

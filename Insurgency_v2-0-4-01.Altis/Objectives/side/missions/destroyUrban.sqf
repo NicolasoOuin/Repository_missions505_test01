@@ -3,12 +3,12 @@
 Author:
 
 	Quiksilver 	(credit to Jester [AW] for initial build)
-				(credit to chucky [allFPS] for initial help with addAction)	
+				(credit to chucky [allFPS] for initial help with addAction)
 				(credit to BangaBob [EOS] for EOS)
 Last modified:
 
 	29/04/2014
-	
+
 Description:
 
 	Objective appears in urban area, with selection of OPFOR Uinfantry, and civilians.
@@ -34,47 +34,46 @@ private ["_object","_briefing","_smPos","_c4Message"];
 	_object setPosATL _smPos;
 
 //-------------------- SPAWN GUARDS and CIVILIANS
-    
-    [[currentSM],[4,4],[4,2],[0,0],[0],[0],[0,0],[5,1,1200,INDEPENDENT,FALSE,FALSE]] call EOS_Spawn; //guards
+
+    [[currentSM],[4,4],[4,2],[0,0],[0],[0],[0,0],[5,1,1200,INDEPENDENT,FALSE,FALSE]] call EOS1_Spawn; //guards
     sleep 1;
-    [[currentSM],[3,1],[3,1],[0,0],[0],[0],[0,0],[3,1,1100,INDEPENDENT,FALSE,FALSE]] call EOS_Spawn; //civs
-	
+    [[currentSM],[3,1],[3,1],[0,0],[0],[0],[0,0],[3,1,1100,INDEPENDENT,FALSE,FALSE]] call EOS1_Spawn; //civs
+
 //-------------------- BRIEFING
-	
+
 	"sideMarker" setMarkerPos (getMarkerPos currentSM);
 	sideMarkerText = "Détruire la cache de munitions"; publicVariable "sideMarkerText";
 	"sideMarker" setMarkerText "Mission secondaire: Détruire la cache d'armes Syndikate"; publicVariable "sideMarker";
 	_briefing = "<t align='center'><t size='2.2'>Nouvel objectif secondaire</t><br/><t size='1.5' color='#00B2EE'>Détruire la cache d'armes Syndikate</t><br/>____________________<br/>The enemy is supplying insurgents with advanced weapons and explosives. Neutralize them!<br/><br/>We've marked the location on your map; Looks like it's in town. Get your CQB gear ready.</t>";
 	GlobalHint = _briefing; hint parseText GlobalHint; publicVariable "GlobalHint";
 	showNotification = ["Nouvel objectif secondaire", "Détruire la cache d'armes Syndikate"]; publicVariable "showNotification";
-			
+
 	sideMissionUp = true; publicVariable "sideMissionUp";
 	SM_SUCCESS = false;	publicVariable "SM_SUCCESS";
 
 //--------------------- WAIT UNTIL OBJECTIVE COMPLETE: Sent to sabotage.sqf to wait for SM_SUCCESS var.
 
 	waitUntil { sleep 3; SM_SUCCESS };
-	
+
 //--------------------- BROADCAST BOMB PLANTED
-	
+
 	hqSideChat = _c4Message; publicVariable "hqSideChat"; [WEST,"HQ"] sideChat hqSideChat;
-	
+
 //-------------------- BOOM!
-	
+
 	sleep 20;									// ghetto bomb timer
 	"M_NLAW_AT_F" createVehicle getPos _object; // default "Bo_Mk82"
 	_object setPos [-10000,-10000,0];			// hide objective
 	sleep 1;
-	
+
 //-------------------- DE-BRIEFING
 
 	sideMissionUp = false; publicVariable "sideMissionUp";
-	[] call QS_fnc_SMhintSUCCESS;
+	[] call QS1_fnc_SMhintSUCCESS;
 	"sideMarker" setMarkerPos [-10000,-10000,-10000]; publicVariable "sideMarker";
-	
+
 //--------------------- DELETE, DESPAWN, HIDE and RESET
-	
+
 	SM_SUCCESS = false; publicVariable "SM_SUCCESS";			// reset var for next cycle
-	sleep 120;													// sleep to hide despawns from players. default 120, 1 for testing	
-	[[currentSM]] call EOS_deactivate;							// despawn enemies and civs
-	
+	sleep 120;													// sleep to hide despawns from players. default 120, 1 for testing
+	[[currentSM]] call EOS1_deactivate;							// despawn enemies and civs
