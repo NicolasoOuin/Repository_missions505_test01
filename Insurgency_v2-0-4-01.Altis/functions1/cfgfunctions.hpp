@@ -1,9 +1,9 @@
 class QS1
 {
-	tag = "QS";
+	tag = "QS1";
 	class functions1
 	{
-		file = "functions";
+		file = "functions1";
 		class findWaterLocation1 {};
 		class actionClearInventory1 {};
 		class actionRefuelUAV1 {};
@@ -26,7 +26,7 @@ class QS1
 		class conditionRefuelUAV1 {};
 		class conditionUAVSoftware1 {};
 		class conditionUH80TurretActionLockL1 {};
-		class conditionUH80TurretActionLockR 1{};
+		class conditionUH80TurretActionLockR1 {};
 		class conditionUH80TurretActions1 {};
 		class conditionUH80TurretActionUnlockL1 {};
 		class conditionUH80TurretActionUnlockR1 {};
@@ -37,7 +37,7 @@ class QS1
 		class garrisonFortEAST1 {};
 		class garrisonFortIND1 {};
 		class garrisonFortFIA1 {};
-		class garrisonFortSYN 1{};
+		class garrisonFortSYN1 {};
 		class loadInventory1 {};
 		class respawnPilot1 {};
 		class rewardPlusHintJet1 {};
@@ -61,6 +61,8 @@ class QS1
 		class SMhintSUCCESS1 {};
 		class switchMoveMP1 {};
 		class taskAttack1 {};
+    class underwaterBuildingDefenders1 {};
+		class underwaterTangos1 {};
 		class uh80Turret1 {};
 		class uh80TurretActionCancel1 {};
 		class uh80TurretActions1 {};

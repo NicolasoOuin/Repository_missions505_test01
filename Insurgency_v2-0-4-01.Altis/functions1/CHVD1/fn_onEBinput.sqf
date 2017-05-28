@@ -1,11 +1,11 @@
 private ["_textValue","_updateType"];
-_varType1 = [_this, 0, "", [""]] call BIS1_fnc_param;
-_slider1 = [_this, 1, controlNull, [0, controlNull]] call BIS1_fnc_param;
-_text1 = [_this, 2, controlNull, [0, controlNull]] call BIS1_fnc_param;
-_varType2 = [_this, 3, "", [""]] call BIS1_fnc_param;
-_slider2 = [_this, 4, controlNull, [0, controlNull]] call BIS1_fnc_param;
-_text2 = [_this, 5, controlNull, [0, controlNull]] call BIS1_fnc_param;
-_syncVar = [_this, 6, "", [""]] call BIS1_fnc_param;
+_varType1 = [_this, 0, "", [""]] call BIS_fnc_param;
+_slider1 = [_this, 1, controlNull, [0, controlNull]] call BIS_fnc_param;
+_text1 = [_this, 2, controlNull, [0, controlNull]] call BIS_fnc_param;
+_varType2 = [_this, 3, "", [""]] call BIS_fnc_param;
+_slider2 = [_this, 4, controlNull, [0, controlNull]] call BIS_fnc_param;
+_text2 = [_this, 5, controlNull, [0, controlNull]] call BIS_fnc_param;
+_syncVar = [_this, 6, "", [""]] call BIS_fnc_param;
 
 if (count _this < 7) then {
 	_updateType = 2;
@@ -19,7 +19,7 @@ if (count _this < 7) then {
 
 switch (_updateType) do {
 	case 1: {
-		_textValue = [ctrlText _text1, "0123456789"] call BIS1_fnc_filterString;
+		_textValue = [ctrlText _text1, "0123456789"] call BIS_fnc_filterString;
 		_textValue = if (_textValue == "") then {0} else {call compile _textValue min 12000 max 0};
 
 		sliderSetPosition [_slider1, _textValue min CHVD1_maxView];

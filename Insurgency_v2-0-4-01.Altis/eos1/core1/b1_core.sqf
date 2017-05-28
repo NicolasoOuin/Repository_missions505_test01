@@ -129,7 +129,7 @@ if (_debug) then {player sidechat format ["Armoured:%1 - r%2",_counter,_AVehGrou
 
 					} else {
 
-						[(_fGroup select 2),(markerPos _mkr)] call QS_fnc_taskAttack;
+						[(_fGroup select 2),(markerPos _mkr)] call QS1_fnc_taskAttack;
 						/*
 						_wp1 = (_fGroup select 2) addWaypoint [(markerpos _mkr), 0];
 						_wp1 setWaypointSpeed "FULL";
@@ -142,7 +142,7 @@ if (_debug) then {player sidechat format ["Armoured:%1 - r%2",_counter,_AVehGrou
 // ADD WAYPOINTS
 
 	{
-		[_x,_mPos] call QS_fnc_taskAttack;
+		[_x,_mPos] call QS1_fnc_taskAttack;
 	} count _aGroup;
 	/*
 	{
@@ -155,7 +155,7 @@ if (_debug) then {player sidechat format ["Armoured:%1 - r%2",_counter,_AVehGrou
 	*/
 
 	{
-		[(_x select 2),_mPos] call QS_fnc_taskAttack;
+		[(_x select 2),_mPos] call QS1_fnc_taskAttack;
 	} forEach _cGrp;
 
 	/*

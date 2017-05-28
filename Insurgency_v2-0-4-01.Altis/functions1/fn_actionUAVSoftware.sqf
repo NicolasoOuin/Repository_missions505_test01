@@ -24,7 +24,7 @@ if (_type in _uav) then {
 	hintSilent "Loading new software ... Please wait a moment ...";
 	player addRating 2000;
 	{deleteVehicle _x;} count (crew _t);
-	[[player,"AinvPercMstpSrasWrflDnon_Putdown_AmovPercMstpSrasWrflDnon"],"QS1_fnc_switchMoveMP",nil,false] spawn BIS1_fnc_MP;
+	[[player,"AinvPercMstpSrasWrflDnon_Putdown_AmovPercMstpSrasWrflDnon"],"QS1_fnc_switchMoveMP",nil,false] spawn BIS_fnc_MP;
 	[_t] spawn {
 		_t = _this select 0;
 		sleep 2;
