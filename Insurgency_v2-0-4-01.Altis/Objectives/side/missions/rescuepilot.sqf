@@ -31,7 +31,7 @@ _c4Message = ["Le pilote a ete ramener à bon port grace à vos exploits.","Le p
 			_accepted = true;
 		};
 	};
-	
+
 	_objPos = [_flatPos, 25, 35, 10, 0, 0.5, 0] call BIS_fnc_findSafePos;
 
 
@@ -41,13 +41,13 @@ _c4Message = ["Le pilote a ete ramener à bon port grace à vos exploits.","Le p
 	sideObj = [CHOPPER_TYPE] call BIS_fnc_selectRandom createVehicle _flatPos;
 	waitUntil {!isNull sideObj};
 
-//-------------------- SPAWN PILOT	
+//-------------------- SPAWN PILOT
 _grp = createGroup west;
 _pilot = _grp createUnit [rescue_type, _flatPos, [], 0, "FORM"];
 [_pilot,man] call vts_isHostage;
 
 _pilot = pilot;
-_pilot setIdentity "Ben_Kerry";	
+_pilot setIdentity "Ben_Kerry";
 _pilot allowDamage false;
 _pilot setName ["Ben Kerry","Ben","Kerry"];
 
@@ -58,7 +58,7 @@ _pilot setName ["Ben Kerry","Ben","Kerry"];
 	} foreach adminCurators;
 
 //-------------------- SPAWN FORCE PROTECTION
-	_enemiesArray = [sideObj] call QS_fnc_SMenemyEAST;
+	_enemiesArray = [sideObj] call QS1_fnc_SMenemyEAST;
 //-------------------- BRIEF
 
 	_fuzzyPos = [((_flatPos select 0) - 300) + (random 600),((_flatPos select 1) - 300) + (random 600),0];
@@ -74,9 +74,9 @@ _pilot setName ["Ben Kerry","Ben","Kerry"];
 	["rescuepilot",[Sauve le Pilot]] call bis_fnc_showNotification;
 	sideMarkerText = "Sauve le Pilot"; publicVariable "sideMarkerText";
 
-	
+
 	//------------------------------------------- Set target start text
-	
+
 	_targetStartText = format
 	[
 		"<t align='center' size='2.2'>New Target</t><br/><t size='1.5' align='center' color='#FFCF11'>%1</t><br/>____________________<br/>We did a good job with the last target, lads. I want to see the same again. Get yourselves over to %1 and take 'em all down!<br/><br/>Remember to take down that radio tower to stop the enemy from calling in CAS.",
@@ -84,13 +84,13 @@ _pilot setName ["Ben Kerry","Ben","Kerry"];
 	];
 
 			showNotification = ["Rescuepilot","Blackfoot down !!!"]; publicVariable "showNotification";
-			
+
 _task =[player, "Rescuepilot", ["L'OPFOR a abattue une helicoptere de reconnaissance.Le pilote a eu le temps d'envoier un message donnant s'est coordonnée.Votre objectif et de retrouve le pilote et le ramener à la Base au Medical EVAC LZ.", "Sauve le Pilot", "sideMarker"], objNull, false] call BIS_fnc_taskCreate;
-	
+
 ["Rescuepilot", "ASSIGNED"] call BIS_fnc_taskSetState;
 
 
-		
+
 	sideMissionUp = true; publicVariable "sideMissionUp";
 	SM_SUCCESS = false; publicVariable "SM_SUCCESS";
 
@@ -98,27 +98,27 @@ _task =[player, "Rescuepilot", ["L'OPFOR a abattue une helicoptere de reconnaiss
 while { sideMissionUp } do {
 
 	if (!alive _pilot) exitWith {
-		
+
 		//-------------------- DE-BRIEFING Mission ECHOUE
-		
+
 		hqSideChat = "Le pilot est mort! Mission ECHOUE!"; publicVariable "hqSideChat"; [WEST,"HQ"] sideChat hqSideChat;
-		[] spawn QS_fnc_SMhintFAIL;
+		[] spawn QS1_fnc_SMhintFAIL;
 		{ _x setMarkerPos [-10000,-10000,-10000]; } forEach ["sideMarker", "sideCircle"]; publicVariable "sideMarker";
 		sideMissionUp = false; publicVariable "sideMissionUp";
-		
+
 		//-------------------- DELETE
-		
+
 		{ _x setPos [-10000,-10000,0]; } forEach [_object,researchTable,_dummy];			// hide objective pieces
 		sleep 120;
 		{ deleteVehicle _x } forEach [sideObj,house];
 		deleteVehicle nearestObject [getPos sideObj,"Land_TentHangar_V1_ruins_F"];
-		[_enemiesArray] spawn QS_fnc_SMdelete;
-	};		
-		
-		
-		//-------------------- DE-BRIEFING Mission Reuusit		
+		[_enemiesArray] spawn QS1_fnc_SMdelete;
+	};
+
+
+		//-------------------- DE-BRIEFING Mission Reuusit
 	if ((pilot distance  MedivacLZ) < 30) exitWith {
-//if ((player distance _t) < 3) then {	
+//if ((player distance _t) < 3) then {
 	//(_pilot distance getMarkerPos "Medivac_LZ_marker" < 30 || !alive sideObj)&&(alive _pilot)
 			hqSideChat = _c4Message;
 			publicVariable "hqSideChat";
@@ -129,36 +129,36 @@ while { sideMissionUp } do {
 			deleteVehicle _wreck;
 			sleep 1;
 			deleteGroup _grp;
-			
-			
+
+
 		//-------------------- DE-BRIEFING
 		sideMissionUp = false; publicVariable "sideMissionUp";
-		[] call QS_fnc_SMhintSUCCESS;
+		[] call QS1_fnc_SMhintSUCCESS;
 		{ _x setMarkerPos [-10000,-10000,-10000]; } forEach ["sideMarker", "sideCircle"]; publicVariable "sideMarker";
 
-	
+
 		//--------------------- DELETE
 		sleep 120;
 		{ deleteVehicle _x } forEach [sideObj,house];
 		deleteVehicle nearestObject [getPos sideObj,"Land_Wreck_Heli_Attack_01_F"];
-		[_enemiesArray] spawn QS_fnc_SMdelete;
+		[_enemiesArray] spawn QS1_fnc_SMdelete;
 	};
 };
 /*__________________________________________________________________
 	//-------------------------------------------- Show global target start hint
 //http://forums.bistudio.com/archive/index.php/t-181676.html
 	//--------------------------------------------
-	
+
 	GlobalHint = _targetStartText; publicVariable "GlobalHint"; hint parseText GlobalHint;
 ["NewSub", "Destroy the enemy radio tower."] call BIS_fnc_taskCreate;
 	publicVariable "showNotification";
 	showNotification = ["NewSub", "Destroy the enemy radio tower."] call bis_fnc_showNotification;;
-	publicVariable "showNotification";		
-player call showNotification;	
+	publicVariable "showNotification";
+player call showNotification;
 	["NewSub",["Disabled the nuke without triggering an alarm.",5]] call bis_fnc_showNotification;
-	
+
 [player, "objShootDown", ["description", "title", "marker"], objNull, false] call BIS_fnc_taskCreate;
-["objShootDown", "Succeeded"] call BIS_fnc_taskSetState;	
+["objShootDown", "Succeeded"] call BIS_fnc_taskSetState;
 
 [_pilot, "objShootDown", ["_targetStartText", "Sauve le Pilot", "sideMarker"], objNull, false] call BIS_fnc_taskCreate;
 ["objShootDown", "Succeeded"] call BIS_fnc_taskSetState;
@@ -171,14 +171,3 @@ player setCurrentTask task_1;
 
 ["objTask1", "Succeeded"] call BIS_fnc_taskSetState;
 ______________________________________________*/
-
-
-
-
-
-
-
-
-
-
-
