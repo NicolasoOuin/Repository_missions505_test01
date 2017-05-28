@@ -105,7 +105,7 @@ for "_x" from 1 to 3 do {
 	_gMarker setWaypointBehaviour "AWARE";
 	_gMarker setWaypointFormation "NO CHANGE";
 
-	[(units _patrolGroup)] call QS_fnc_setSkill1;
+	[(units _patrolGroup)] call QS1_fnc_setSkill1;
 
 	_enemiesArray = _enemiesArray + [_patrolGroup];
 
@@ -145,7 +145,7 @@ for "_x" from 1 to _nbmax do {
 	_wp1 setWaypointSpeed "FULL";
 	_wp1 setWaypointType "SAD";
 
-	[(units _airGroup)] call QS_fnc_setSkill2;
+	[(units _airGroup)] call QS1_fnc_setSkill2;
 	_air flyInHeight 300;
 	_airGroup setCombatMode "RED";
 	_air lock 3;
@@ -196,7 +196,7 @@ for "_x" from 0 to 1 do {
 	currentAOUp = false; publicVariable "currentAOUp";
 
 	deleteVehicle _dt;
-	[_enemiesArray] spawn QS_fnc_AOdelete;
+	[_enemiesArray] spawn QS1_fnc_AOdelete;
 
 	//----------------------------------------------------- MAINTENANCE
 
